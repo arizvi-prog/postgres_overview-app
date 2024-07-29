@@ -6,7 +6,6 @@ CREATE DATABASE student_app_db;
 
 \c student_app_db;
 
-
 CREATE TABLE courses (
 	id SERIAL PRIMARY KEY,
 	course_name VARCHAR(250),
@@ -25,8 +24,10 @@ CREATE TABLE students (
 	course_id INT NOT NULL,
 	group_id INT,
 	group_leader_id INT,
-	FOREIGN KEY(course_id) REFERENCES courses(id),
-	FOREIGN KEY(group_id) REFERENCES groups(id),
+	FOREIGN KEY(course_id) REFERENCES courses(id)
+		ON DELETE CASCADE,
+	FOREIGN KEY(group_id) REFERENCES groups(id)
+		ON DELETE SET NULL,
 	FOREIGN KEY(group_leader_id) REFERENCES students(id)
+		ON DELETE SET NULL
 );
-
